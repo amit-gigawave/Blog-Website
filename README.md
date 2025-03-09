@@ -11,7 +11,7 @@ A secure blog platform with custom authentication, modern UI components, and ful
 ## Architecture Overview
 
 ### Frontend (Next.js + TypeScript)
-- **UI Framework**: Next.js 15 with App Router
+- **UI Framework**: Next.js 14 with App Router
 - **Component Library**: shadcn/ui
 - **State Management**: 
   - Local: Zustand/React Context
