@@ -1,163 +1,120 @@
-````markdown
+# Full Stack Next.js Blog Platform
 
-# Full Stack Next.js Technical Assessment (With Auth)
+## Project Overview
+A secure blog platform with custom authentication, modern UI components, and full-stack implementation.
 
-## Time Limit: 3 hours ⏳
-**UI Reference**: (https://beautiful-blogscape.vercel.app/)
-
-### Objective
-
-Build a secure blog platform with custom authentication and modern UI components. Demonstrate full-stack skills including protected routes, middleware, and component library implementation.
+**UI Reference**: [Beautiful Blogscape](https://beautiful-blogscape.vercel.app/)  
+**Time Limit**: 3 hours ⏳
 
 ---
 
-## Key Requirements
+## Architecture Overview
 
-### Core Features
+### Frontend (Next.js + TypeScript)
+- **UI Framework**: Next.js 15 with App Router
+- **Component Library**: shadcn/ui
+- **State Management**: 
+  - Local: Zustand/React Context
+  - Server State: React Query (optional)
+- **Type Safety**: TypeScript
 
-1. **Authentication System**
-
-   - Custom JWT implementation
-   - User registration & login
-   - Protected routes for authenticated users
-   - Role-based access control (admin/user)
-   - Session management with HTTP-only cookies
-
-2. **Blog Post Management**
-
-   - Create/edit/delete posts (authenticated users)
-   - Public post viewing
-   - Author-based permissions
-
-3. **Comment System**
-
-   - Add comments (authenticated users)
-   - Delete comments (author/admin only)
-
-4. **UI Implementation**
-   - Minimum 3 shadcn components
-   - Responsive layouts
-   - Accessible form components
-
-### Technical Expectations
-
-#### Authentication
-
-- Custom middleware implementation
-- JWT verification
-- Protected API routes
-- Password hashing (bcrypt)
-- Secure credential storage
-
-#### Frontend
-
-- shadcn/ui component library
-- Auth-aware navigation
-- Protected client-side routes
-- Session state management
-- Loading states & error handling
-
-#### Backend
-
-- Type-safe API handlers
-- Zod validation
-- PostgreSQL integration
-- Secure cookies configuration
-- Rate limiting (basic)
+### Backend (Next.js API Routes / Express.js)
+- **Database**: PostgreSQL
+- **API Validation**: Zod
+- **Authentication**: Custom JWT implementation
+- **Password Security**: bcrypt
 
 ---
 
-## Project Setup
+## Implementation Requirements
 
-1. Clone this repository
-2. Install dependencies:
-   ```bash
-   npm install
-   npx shadcn-ui@latest init
-   ```
-````
+### Frontend Implementation
 
-3. Set up environment variables (.env.example provided)
-4. Configure database with auth tables
-5. Run development server: `npm run dev`
+#### 1. User Interface
+- **Required shadcn/ui Components** (minimum 3):
+  - Authentication forms
+  - Blog post cards
+  - Comment sections
+  
+#### 2. Pages & Routes
+- `/` - Home/Blog listing (Index page)
+- `/login` - User authentication
+- `/post/:id` - Individual post details
+- `/create` - Create new post (protected)
+- `/edit/:id` - Edit existing post (protected)
+- `*` - 404 Not Found page
 
----
+#### 3. State Management
+- Authentication state
+- Blog post data
+- Form states
+- Loading states
+- Error handling
 
-## Expected Deliverables
-
-1. **Authentication Flow**
-
-   - Custom JWT implementation
-   - Middleware for protected routes
-   - Session persistence
-   - Error handling for auth failures
-
-2. **Component System**
-
-   - shadcn components in critical flows
-   - Custom form implementations
-   - Responsive card layouts
-
-3. **Security Implementation**
-   - Password hashing
-   - Secure token handling
-   - CSRF protection
-   - Input validation
+#### 4. Client-side Security
+- Protected route handling
+- Auth token management
+- Form validation
 
 ---
 
-## Technology Constraints
+### Backend Implementation
 
-| Component       | Required Tech             |
-| --------------- | ------------------------- |
-| Authentication  | Custom JWT Implementation |
-| UI Library      | shadcn/ui                 |
-| Middleware      | Next.js middleware        |
-| Security        | bcrypt & jose             |
-| Session Storage | Cookies/JWT               |
+#### 1. Authentication System
+- **JWT Implementation**:
+  - Token generation
+  - Token validation
+  - Refresh token mechanism
+
+  
+#### 2. API Endpoints
+- **Auth Routes**:
+  - `POST /api/auth/register`
+  - `POST /api/auth/login`
+  
+- **Blog Routes**:
+  - `GET /api/posts`
+  - `GET /api/posts/[id]`
+  - `POST /api/posts` (protected)
+  - `PUT /api/posts/[id]` (protected)
+  - `DELETE /api/posts/[id]` (protected)
+  
+- **Comment Routes**:
+  - `GET /api/posts/[id]/comments`
+  - `POST /api/posts/[id]/comments` (protected)
+  - `DELETE /api/posts/[id]/comments/[commentId]` (protected)
+
+#### 3. Database Schema
+- **Users Table**:
+  - id (UUID)
+  - email
+  - hashed_password
+  - created_at
+  
+- **Posts Table**:
+  - id (UUID)
+  - title
+  - content
+  - author_id
+  - created_at
+  - updated_at
+  
+- **Comments Table**:
+  - id (UUID)
+  - post_id
+  - user_id
+  - content
+  - created_at
+
+#### 4. Security Measures
+- Password hashing with bcrypt
+- Input validation with Zod
 
 ---
 
-## Evaluation Criteria
-
-1. **Security Implementation**
-
-   - Proper credential handling
-   - Secure session management
-   - Protected routes/API endpoints
-
-2. **Component Quality**
-
-   - Effective shadcn usage
-   - Accessible markup
-   - Responsive design
-
-3. **Auth Architecture**
-   - Middleware effectiveness
-   - Role-based access implementation
-   - Error handling for unauthorized requests
-
----
-
-## Submission Checklist
-
-After 3 hours, provide:
-
-1. Complete project with auth flow
-2. Middleware implementation
-3. Security measures documentation
-4. Component usage explanation
-
----
-
-**Critical Requirements**:
-
-- Implement authentication without auth libraries
-- Use minimum 3 shadcn components
-- Never store plain text passwords
-- Validate all API requests
-- Maintain TypeScript integrity
-
-```
-
-```
+## Critical Requirements
+- ✅ Custom authentication (no auth libraries)
+- ✅ Minimum 3 shadcn components
+- ✅ Secure password storage
+- ✅ Complete API validation
+- ✅ TypeScript implementation
